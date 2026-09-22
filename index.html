@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Muestrario · Extractor de paletas de color para marca y moodboard</title>
+  <meta name="description" content="Extrae los colores dominantes de tus imágenes con k-means, comprueba qué combinaciones tienen contraste suficiente y exporta la paleta en PNG, CSS y JSON.">
+  <meta name="author" content="Marta Merchán Albano">
+  <meta name="theme-color" content="#f6f4ef">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect x='3' y='3' width='8' height='26' rx='2' fill='%23c8553d'/%3E%3Crect x='12' y='3' width='8' height='26' rx='2' fill='%23f2d0a4'/%3E%3Crect x='21' y='3' width='8' height='26' rx='2' fill='%23284b63'/%3E%3C/svg%3E">
+  <link rel="stylesheet" href="css/estilos.css">
+</head>
+<body>
+
+  <header class="cabecera">
+    <div class="contenedor cabecera__dentro">
+      <div class="marca">
+        <span class="marca__muestras" id="muestrasLogo" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></span>
+        <div>
+          <h1 class="marca__titulo">Muestrario</h1>
+          <p class="marca__lema">Extrae la paleta de color de tus imágenes para tu marca o tu moodboard</p>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main class="contenedor principal">
+
+    <!-- ================= Imágenes y ajustes ================= -->
+    <section class="bloque" aria-labelledby="t-imagenes">
+      <div class="bloque__cabecera">
+        <h2 id="t-imagenes">1. Imágenes</h2>
+        <p class="nota">Las imágenes se analizan en tu navegador y no se envían a ningún sitio.</p>
+      </div>
+      <div class="entrada">
+        <label class="soltar" id="zonaSoltar" for="archivos">
+          <input type="file" id="archivos" accept="image/*" multiple>
+          <strong>Elige una o varias imágenes</strong>
+          <span>o arrástralas aquí · lookbook, campaña, fotos de producto…</span>
+        </label>
+        <div class="ajustes">
+          <label class="ajuste">Número de colores <output id="valorK">6</output>
+            <input type="range" id="k" min="3" max="10" value="6">
+          </label>
+          <label class="ajuste">Precisión
+            <select id="calidad">
+              <option value="rapida">Rápida</option>
+              <option value="normal" selected>Normal</option>
+              <option value="alta">Alta</option>
+            </select>
+          </label>
+          <button type="button" class="boton boton--linea" id="botonEjemplo">Probar con imágenes de ejemplo</button>
+        </div>
+      </div>
+      <ul class="miniaturas" id="miniaturas" aria-label="Imágenes cargadas"></ul>
+    </section>
+
+    <div id="resultados" hidden>
+
+      <!-- ================= Paleta ================= -->
+      <section class="bloque" aria-labelledby="t-paleta">
+        <div class="bloque__cabecera">
+          <h2 id="t-paleta">2. Paleta</h2>
+          <p class="nota" id="infoPaleta"></p>
+        </div>
+        <div class="proporcion" id="proporcion" aria-hidden="true"></div>
+        <ul class="paleta" id="paleta"></ul>
+        <div class="exportar">
+          <span class="exportar__titulo">Exportar paleta</span>
+          <button type="button" class="boton" id="expPng">PNG</button>
+          <button type="button" class="boton" id="expCss">Variables CSS</button>
+          <button type="button" class="boton" id="expJson">JSON</button>
+        </div>
+      </section>
+
+      <!-- ================= Moodboard ================= -->
+      <section class="bloque" aria-labelledby="t-moodboard">
+        <div class="bloque__cabecera">
+          <h2 id="t-moodboard">3. Moodboard</h2>
+          <label class="titulo-mb">Título <input type="text" id="tituloMb" value="Moodboard" maxlength="50"></label>
+        </div>
+        <div class="moodboard" id="moodboard">
+          <p class="moodboard__titulo" id="mbTitulo">Moodboard</p>
+          <div class="moodboard__collage" id="mbCollage"></div>
+          <div class="moodboard__franja" id="mbFranja"></div>
+        </div>
+        <div class="exportar">
+          <button type="button" class="boton" id="expMoodboard">Descargar moodboard (PNG)</button>
+        </div>
+      </section>
+
+      <!-- ================= Contraste ================= -->
+      <section class="bloque" aria-labelledby="t-contraste">
+        <div class="bloque__cabecera">
+          <h2 id="t-contraste">4. Combinaciones para texto</h2>
+          <label class="interruptor"><input type="checkbox" id="verTodas"> Mostrar también las que no cumplen</label>
+        </div>
+        <p class="nota">Contraste según WCAG 2.1. <strong>AA</strong>: 4,5:1 para texto normal · <strong>AAA</strong>: 7:1 · <strong>Solo títulos</strong>: 3:1, válido para texto grande (24 px, o 18,7 px en negrita).</p>
+        <ul class="combinaciones" id="combinaciones"></ul>
+      </section>
+    </div>
+  </main>
+
+  <p class="aviso" id="aviso" role="status" hidden></p>
+
+  <footer class="pie">
+    <div class="contenedor">
+      <p>Muestrario · Software libre con licencia MIT · Marta Merchán Albano, 2026</p>
+      <p>Algoritmo k-means programado en JavaScript, sin librerías externas.</p>
+    </div>
+  </footer>
+
+  <script src="js/color.js"></script>
+  <script src="js/kmeans.js"></script>
+  <script src="js/exportar.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>

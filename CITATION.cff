@@ -1,0 +1,20 @@
+cff-version: 1.2.0
+message: "Si utilizas este software, cítalo con los datos siguientes."
+type: software
+title: "Muestrario: extractor de paletas de color para marca y moodboard"
+abstract: >-
+  Herramienta web que extrae los colores dominantes de una o varias imágenes mediante un algoritmo k-means++ programado en JavaScript sobre el espacio de color CIELAB. Muestra la paleta con códigos HEX, RGB y HSL, compone un moodboard, evalúa el contraste WCAG 2.1 de las combinaciones para texto y exporta la paleta en PNG, CSS y JSON. Funciona íntegramente en el navegador.
+authors:
+  - family-names: "Merchán Albano"
+    given-names: "Marta"
+version: 1.0.0
+date-released: 2026-09-22
+license: MIT
+repository-code: "https://github.com/martamerchan/extractor-paletas-color"
+url: "https://martamerchan.github.io/extractor-paletas-color/"
+keywords:
+  - color
+  - paleta de color
+  - k-means
+  - identidad visual
+  - moodboard
