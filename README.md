@@ -1,6 +1,6 @@
 # Muestrario · Extractor de paletas de color para marca y moodboard
 
-<!-- INSIGNIA DOI: se añadirá aquí después de publicar la versión 1.0.0 en Zenodo -->
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.22913595.svg)](https://doi.org/10.5281/zenodo.22913595)
 
 Herramienta web que extrae los **colores dominantes** de una o varias imágenes (un lookbook, una campaña, fotos de producto) con un algoritmo de agrupación **k-means programado en JavaScript**. Muestra la paleta con sus códigos, compone un **moodboard**, indica qué **combinaciones de la paleta tienen contraste suficiente para texto** y exporta la paleta en **PNG, variables CSS y JSON**.
 
